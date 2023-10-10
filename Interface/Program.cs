@@ -1,70 +1,90 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace Interface
 {
     public class Program : IOperations
     {
-        public void AddToCart(int prodid, string city, int qty, int price)
+        public static void Main(string[] args)  
+
+       
         {
-            // Create a product and add it to the cart
-            var product = new Product
+
+            Product p = new Product();
             {
-                Productid = prodid,
-                Productname = city,
-                Qty = qty,
-                Price = price
-            };
-            CurrentOrder.Cart[prodid] = product;
-            Console.WriteLine($"Added to cart: Product #{prodid}, Name: {city}, Quantity: {qty}, Price: {price}");
+                Console.WriteLine("enter your product id:");
+                p.Productid = Convert.ToInt32(Console.ReadLine());
+
+
+                Console.WriteLine("enter your product name:");
+                p.Productname = (Console.ReadLine());
+
+
+                Console.WriteLine("enter your product quantity:");
+                p.Qty = Convert.ToInt32(Console.ReadLine());
+
+                Console.WriteLine("enter your product price:");
+                p.Price = Convert.ToInt32(Console.ReadLine());
+
+
+                Console.WriteLine("*****************");
+
+
+                Customer c = new Customer();
+                Console.WriteLine("enter your customer id:");
+                c.Custid = Convert.ToInt32(Console.ReadLine());
+
+                Console.WriteLine("enter your customer name:");
+                c.Custname = (Console.ReadLine());
+
+                Order o = new Order();
+
+                Console.WriteLine("enter your first order date:");
+                o.OrderDate = Convert.ToDateTime(Console.ReadLine());
+
+                Console.WriteLine("enter your second order date:");
+                o.OrderDate = Convert.ToDateTime(Console.ReadLine());
+
+
+                Console.WriteLine("************************************");
+
+
+
+                o.Addtocart(c.Custid, c.Custname, o.OrderDate, p.Qty, p.Price);
+
+                Console.WriteLine($"CustomerDetails: {c.Custid},{c.Custname}");
+                Console.WriteLine($"ProductDetails:  {p.Productid},{p.Productname},{p.Qty},{p.Price}");
+                Console.WriteLine($"OrderDetails:    {o.OrderDate},{o.OrderDate}");
+
+                Console.ReadLine();
+            }
+            
         }
 
-        public void PaymentGateway(int amt)
-        {
-            // Implement the payment gateway logic here
-            Console.WriteLine($"Payment of {amt:C} made successfully.");
-        }
+        //public static void AddToCart(ShoppingCart cart)
+        //{
+        //    Product product = new Product();
+        //    Console.WriteLine("Enter product id:");
+        //    product.Productid = Convert.ToInt32(Console.ReadLine());
 
-        public void BuyNow()
-        {
-            // Complete the order and proceed with payment
-            CurrentOrder.BookOrder();
-            PaymentGateway(CurrentOrder.Cart.Values.Sum(p => p.Price));
-        }
+        //    Console.WriteLine("Enter product name:");
+        //    product.Productname = Console.ReadLine();
 
-        private Customer CurrentCustomer { get; set; }
-        // Current order
-        private Order CurrentOrder { get; set; }
+        //    Console.WriteLine("Enter product quantity:");
+        //    product.Qty = Convert.ToInt32(Console.ReadLine());
 
-        static void Main(string[] args)
-        {
-            Program program = new Program();
-            program.StartShopping();
-        }
+        //    Console.WriteLine("Enter product price:");
+        //    product.Price = Convert.ToInt32(Console.ReadLine());
 
+        //    // Add the product to the cart
+        //    cart.AddProduct(product);
 
-        public void StartShopping()
-        {
-            CurrentCustomer = new Customer
-            {
-                Custid = 1,
-                Custname = "John Doe"
-            };
-            CurrentOrder = new Order();
-            CurrentOrder.OrderDate = DateTime.Now;
-            Console.WriteLine($"Welcome, {CurrentCustomer.Custname}! Your Customer ID: {CurrentCustomer.Custid}");
-            Console.WriteLine($"Your Order ID: {CurrentOrder.OrderID}, Order Date: {CurrentOrder.OrderDate}");
-
-            // Shopping logic
-            AddToCart(101, "Product A", 2, 50);
-            AddToCart(102, "Product B", 1, 30);
-            BuyNow();
-
-            Console.Read();
-
-        }
+        //    Console.WriteLine("Product added to the cart.");
+        //}
     }
-}
+ }

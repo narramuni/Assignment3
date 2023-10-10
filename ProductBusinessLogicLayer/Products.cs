@@ -49,9 +49,11 @@ namespace Interface
             get { return _price; }
             set { _price = value; }
         }
+
+        public decimal CalculateTotalpurchase(float qty, decimal price)
+        {
+            decimal totalpurchase = price * Convert.ToDecimal(qty);
+            return totalpurchase;
+        }
     }
 }
-
-
-
-

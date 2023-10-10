@@ -7,55 +7,53 @@ using System.Threading.Tasks;
 
 namespace Interface
 {
-    //public enum PaymentMode
-    //{
-    //    cash,
-    //    upi,
-    //    debit,
-    //    credit,
-    //    netbanking
-    //}
+    public enum PaymentMode
+    {
+        cash,
+        upi,
+        debit,
+        credit,
+        netbanking
+    }
 
 
 
 
     public class Order
     {
-        private  int  _orderid, OrderidCounter = 1;
+        private static int lastOrderId = 1;
+        private int _orderid;
 
         public int OrderID
         {
             get { return _orderid; }
             set { _orderid = value; }
         }
-        private DateTime _orderdate;
 
+
+
+
+        private DateTime _orderdate;
         public DateTime OrderDate
         {
             get { return _orderdate; }
             set { _orderdate = value; }
         }
 
-        public Dictionary<int, Product> Cart { get; private set; } = new Dictionary<int, Product>();
-
-        public void BookOrder()
+        public void Addtocart(int custid, string custname, DateTime orderdate, float qty, decimal price)
         {
-            Console.WriteLine($"Order #{OrderID} is booked on {OrderDate}");
-            foreach (var item in Cart)
-            {
-                Console.WriteLine($"Product: {item.Value.Productname}, Quantity: {item.Value.Qty}, Price: {item.Value.Price}");
-            }
-        }
+            OrderID = ++lastOrderId;
+            OrderDate = orderdate;
+            Console.WriteLine("Order booked successfully......");
 
-        public Order()
-        {
-            _orderid = OrderidCounter++;
+
 
         }
-
-        public decimal CalculateTotalPurchase(int qty, int price)
+        private PaymentMode PaymentGateway;
+        public PaymentMode paymentgateway
         {
-            return qty * price;
+            get { return PaymentGateway; }
+            set { PaymentGateway = value; }
         }
     }
 }
