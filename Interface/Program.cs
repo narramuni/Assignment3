@@ -66,25 +66,6 @@ namespace Interface
             
         }
 
-        //public static void AddToCart(ShoppingCart cart)
-        //{
-        //    Product product = new Product();
-        //    Console.WriteLine("Enter product id:");
-        //    product.Productid = Convert.ToInt32(Console.ReadLine());
-
-        //    Console.WriteLine("Enter product name:");
-        //    product.Productname = Console.ReadLine();
-
-        //    Console.WriteLine("Enter product quantity:");
-        //    product.Qty = Convert.ToInt32(Console.ReadLine());
-
-        //    Console.WriteLine("Enter product price:");
-        //    product.Price = Convert.ToInt32(Console.ReadLine());
-
-        //    // Add the product to the cart
-        //    cart.AddProduct(product);
-
-        //    Console.WriteLine("Product added to the cart.");
-        //}
+        
     }
  }
